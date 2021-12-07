@@ -1,0 +1,4 @@
+CREATE SCHEMA keycloak;
+CREATE SCHEMA tickets;
+CREATE SCHEMA flights;
+CREATE SCHEMA privileges;
