@@ -24,6 +24,7 @@ jobs:
           # TODO insert your variant
           collection: <variant>/postman-collection/[rsoi] postman_collection.json
           environment: postman-environment/[rsoi][k8s] postman_environment.json
+          ignoreRedirects: true
           delayRequest: 100
           reporters: cli
 
