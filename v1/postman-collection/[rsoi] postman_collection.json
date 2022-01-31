@@ -55,7 +55,7 @@
 									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");",
 									"    ",
 									"    const response = pm.response.json();",
-									"    pm.collectionVariables.set(\"authorizationToken\", request.access_token)",
+									"    pm.collectionVariables.set(\"authorizationToken\", response.access_token)",
 									"})"
 								],
 								"type": "text/javascript"
