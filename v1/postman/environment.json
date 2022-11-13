@@ -1,6 +1,6 @@
 {
 	"id": "acc90f86-88ad-444e-924e-6f48f6ee7711",
-	"name": "[rsoi][k8s] Flight Service",
+	"name": "[rsoi][lab5] Flight Service",
 	"values": [
 		{
 			"key": "serviceUrl",
@@ -29,11 +29,6 @@
 		},
 		{
 			"key": "clientSecret",
-			"value": "",
-			"enabled": true
-		},
-		{
-			"key": "realm",
 			"value": "",
 			"enabled": true
 		}

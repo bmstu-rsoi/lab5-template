@@ -1,61 +1,28 @@
 {
 	"info": {
-		"_postman_id": "388e86fd-938b-41aa-8866-7950cefbfc94",
+		"_postman_id": "dd403a17-fd76-46c7-b079-57fecf00cc0d",
 		"name": "[rsoi][lab5] Hotels Booking System",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "976707"
 	},
 	"item": [
 		{
 			"name": "Gateway API",
 			"item": [
 				{
-					"name": "[success] Авторизация на Identity Provider",
+					"name": "[auth] Get Token",
 					"event": [
 						{
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test(\"Проверка перенаправления на Identity Provider\", () => {",
-									"    pm.response.to.have.status(302)",
-									"})"
-								],
-								"type": "text/javascript"
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{serviceUrl}}/api/v1/authorization",
-							"host": [
-								"{{serviceUrl}}"
-							],
-							"path": [
-								"api",
-								"v1",
-								"authorization"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "[success] OAuth2 Resource Owner flow",
-					"event": [
-						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"pm.test(\"Validate token\", () => {",
+									"pm.test(\"Получить токен\", () => {",
 									"    pm.response.to.have.status(200)",
-									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.eql(\"application/json\");",
-									"    ",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
+									"",
 									"    const response = pm.response.json();",
-									"    pm.collectionVariables.set(\"authorizationToken\", request.access_token)",
+									"    pm.expect(response.access_token).not.be.empty",
+									"    pm.collectionVariables.set(\"authorizationToken\", response.access_token)",
 									"})"
 								],
 								"type": "text/javascript"
@@ -73,7 +40,7 @@
 							"urlencoded": [
 								{
 									"key": "scope",
-									"value": "openid email profile",
+									"value": "openid",
 									"type": "text"
 								},
 								{
@@ -92,28 +59,24 @@
 									"type": "text"
 								},
 								{
-									"key": "client_id",
+									"key": "clientId",
 									"value": "{{clientId}}",
 									"type": "text"
 								},
 								{
-									"key": "client_secret",
+									"key": "clientSecret",
 									"value": "{{clientSecret}}",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{identityProviderUrl}}/auth/realms/{{realm}}/protocol/openid-connect/token",
+							"raw": "{{identityProviderUrl}}/oauth/token",
 							"host": [
 								"{{identityProviderUrl}}"
 							],
 							"path": [
-								"auth",
-								"realms",
-								"{{realm}}",
-								"protocol",
-								"openid-connect",
+								"oauth",
 								"token"
 							]
 						}
@@ -202,6 +165,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -287,6 +260,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -389,6 +372,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [
 							{
@@ -500,6 +493,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -604,6 +607,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -705,6 +718,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -745,6 +768,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -820,6 +853,16 @@
 						}
 					],
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authorizationToken}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
@@ -846,14 +889,7 @@
 				}
 			],
 			"auth": {
-				"type": "bearer",
-				"bearer": [
-					{
-						"key": "token",
-						"value": "{{authorizationToken}}",
-						"type": "string"
-					}
-				]
+				"type": "noauth"
 			},
 			"event": [
 				{

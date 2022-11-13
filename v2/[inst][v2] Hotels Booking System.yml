@@ -5,39 +5,6 @@ info:
 servers:
   - url: http://localhost:8080
 paths:
-  /api/v1/authorization:
-    get:
-      summary: Авторизация на Identity Provider
-      tags:
-        - Authorization
-      responses:
-        "302":
-          description: Перенаправление на Identity Provider
-
-  /api/v1/callback:
-    get:
-      summary: Redirect от Identity Provider с кодом
-      tags:
-        - Authorization
-      parameters:
-        - name: code
-          in: query
-          required: true
-          schema:
-            type: string
-        - name: state
-          in: query
-          required: false
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Acces и Refresh токены
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/TokenResponse"
-
   /api/v1/hotels:
     get:
       summary: Получить список отелей
@@ -242,26 +209,6 @@ components:
       bearerFormat: JWT
 
   schemas:
-    TokenResponse:
-      type: object
-      example:
-        {
-          "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3NzdhYzA2Mi1lNDY3LTQxNmItYTFmYS1lMjQzZDAyZWYzNWUiLCJuYW1lIjoiUm9tYW5vdiBBbGV4IiwiaWF0IjoxNTE2MjM5MDIyfQ.VpDF4SeTgVBMkcGLIEYQP5ESYegaiafENagWwFOUtHI",
-          "refreshToken": "ff9bca65-659b-4b66-8d0c-ea4a719a34e7",
-          "tokenType": "Bearer"
-        }
-      properties:
-        accessToken:
-          type: string
-          description: JWT токен
-        refreshToken:
-          type: string
-          description: Токен для обновления Access Token
-        tokenType:
-          type: string
-          description: Тип токена (всегда bearer)
-          default: "Bearer"
-
     PaginationResponse:
       type: object
       example:
